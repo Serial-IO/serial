@@ -1,5 +1,8 @@
 # Serial
 
+> [!Warning]
+> Just to be clear, currently nothing works in this Library. 😅 We are working on it.
+
 <a href="https://deno.land"><img align="right" src="https://github.com/Serial-Link/.github/blob/main/assets/profile.svg" height="150px" alt="the serial port standing in the rain"></a>
 
 [![Lint](https://github.com/Serial-Link/serial/actions/workflows/lint.yml/badge.svg)](https://github.com/Serial-Link/serial/actions/workflows/lint.yml)
