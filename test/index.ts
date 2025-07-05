@@ -43,6 +43,10 @@ const errorCallback = new Deno.UnsafeCallback(
 
 dll.symbols.serialOnError(errorCallback.pointer);
 
+const version = new Uint32Array(dll.symbols.getVersion().buffer);
+console.log(version[0], version[1], version[2]);
+
+
 // -----------------------------------------------------------------------------
 // 1. List available ports
 // -----------------------------------------------------------------------------
