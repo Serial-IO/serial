@@ -8,7 +8,7 @@ export interface Device {
     port : string,
 
     /**
-     * The full path to the port. (E.g. `/dev/ttyACM2`, `COM5`, ...)
+     * The full path to the port. (E.g. `/dev/ttyACM2`, `\\\\?\\acpi#pnp0501#0#{86e0d1e0-8089-11d0-9ce4-08003e301f73}`, ...)
      */
     path : string,
 
