@@ -1,7 +1,7 @@
 const dll = Deno.dlopen(
   './libcpp_windows_bindings.dll',
   {
-    getVersion: { parameters: [], result: {struct: ["i32", "i32", "i32"]} },
+    getVersion: { parameters: ["pointer"], result: "void" },
     serialOpen: { parameters: ["pointer", "i32", "i32", "i32", "i32"], result: "pointer" },
     serialClose: { parameters: ["pointer"], result: "void" },
     serialWrite: { parameters: ["pointer", "pointer", "i32", "i32", "i32"], result: "i32" },
@@ -43,8 +43,12 @@ const errorCallback = new Deno.UnsafeCallback(
 
 dll.symbols.serialOnError(errorCallback.pointer);
 
-const version = new Uint32Array(dll.symbols.getVersion().buffer);
-console.log(version[0], version[1], version[2]);
+const verBuf = new Uint8Array(12);                // 3 × 4 Byte
+const verPtr = Deno.UnsafePointer.of(verBuf);
+dll.symbols.getVersion(verPtr);
+const version = new Uint32Array(verBuf.buffer);
+
+console.log(`Version ${version[0]}.${version[1]}.${version[2]}`);
 
 
 // -----------------------------------------------------------------------------
