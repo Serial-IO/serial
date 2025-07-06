@@ -17,7 +17,7 @@ This library provides an interface for the communication with serial devices and
 - Create multiple serial connections at the same time.
 - List available ports and their properties (if available).
 - Set timeouts for both reading and writing.
-- All functions are async.
+- Async functions.
 - Uses no third party modules.
 - Works on multiple different operating systems (check [compatibility](#compatibility) for mor info).
 
@@ -26,7 +26,7 @@ This library provides an interface for the communication with serial devices and
 |---------|-------------------------|---------------|
 | Windows | Windows 10 (x64)        | in progress   |
 | Linux   | Ubuntu Server 22.04 LTS | in progress   |
-| Mac     | -                       | planned       |
+| MacOS   | -                       | planned       |
 
 ## Documentation
 - Check out the [Wiki](https://github.com/Serial-Link/serial/wiki) section on how to use this library.
