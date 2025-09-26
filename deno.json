@@ -12,5 +12,15 @@
         "include": [
             "**/*.test.ts"
         ]
+    },
+    "lint": {
+        "rules": {
+            "tags": [
+                "recommended"
+            ],
+            "include": [
+                "verbatim-module-syntax"
+            ]
+        }
     }
 }
