@@ -1,4 +1,8 @@
 {
+    "name": "@serial/serial",
+    "version": "0.1.0",
+    "license": "./LICENSE",
+    "exports": "./src/index.ts",
     "tasks": {
         "index": "deno run --check --unstable -A ./src/index.ts",
         "test": {
