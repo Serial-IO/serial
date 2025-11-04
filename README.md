@@ -30,7 +30,7 @@ This library provides an interface for the communication with serial devices and
 
 ## Documentation
 - Check out the [Wiki](https://github.com/Serial-Link/serial/wiki) section on how to use this library.
-- Check out [denonomicon.deno.dev](https://denonomicon.deno.dev/) and [deno.land/manual@v1.36.4/runtime/ffi_api](https://deno.land/manual@v1.36.4/runtime/ffi_api) about Deno + FFI.
+- Check out [denonomicon.deno.dev](https://denonomicon.deno.dev/) and [docs.deno.com/runtime/fundamentals/ffi/](https://docs.deno.com/runtime/fundamentals/ffi/) about Deno + FFI.
 
 ## Credits
 - Big thanks goes out to [@Katze719](https://github.com/Katze719) who wrote most of the C++ files and functions!
