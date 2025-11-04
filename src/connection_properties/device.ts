@@ -24,7 +24,7 @@ export interface Device {
 
   /**
    * The Plug and Play ID of the device. (E.g. `usb-Arduino__www.arduino.cc__0043_698471028216477376-if00`,
-   * `USB\\VID_5678&PID_1234\\698471028216477376`)
+   * `USB\\VID_5678&PID_1234\\698471028216477376`, ...)
    */
   pnpId : string | undefined,
 
