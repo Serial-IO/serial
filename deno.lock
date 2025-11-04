@@ -1,0 +1,17 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@loat-dev/lint-plugins@~0.1.2": "0.1.2"
+  },
+  "jsr": {
+    "@loat-dev/lint-plugins@0.1.2": {
+      "integrity": "6a3b623cf5cf2eb5cec4e2d9a80cec0c8cde158039f67dd4e404b3603b1498e8"
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/cli@^1.0.6",
+      "jsr:@std/fmt@^1.0.2"
+    ]
+  }
+}

@@ -1,31 +1,24 @@
-name: Lint
-
+name: 'Run Linter'
 on:
   push:
-    branches: ["main"]
+    branches: 
+      - 'main'
 
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  checks: write
-
 jobs:
   lint:
-    name: Lint
+    name: 'Lint'
     runs-on: ubuntu-latest
-    env:
-      deno-version: v1.x
 
     steps:
-      - name: Setup Repository (${{github.event.repository.name}})
-        uses: actions/checkout@v3
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v5
 
-      - name: Setup Deno (${{env.deno-version}})
-        uses: denoland/setup-deno@v1
+      - name: 'Setup Deno'
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: ${{env.deno-version}}
+          deno-version: 'v2.x'
       
-      - name: Run Linter
-        run: deno lint
+      - name: 'Run Linter'
+        run: deno task lint

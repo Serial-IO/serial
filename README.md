@@ -38,8 +38,8 @@ This library provides an interface for the communication with serial devices and
 - Thanks to [@Dj](https://github.com/DjDeveloperr) for the inspiration on how to write such a library!
 
 ## Licence
-GPLv2.0. Check [LICENSE](https://github.com/Serial-Link/serial/blob/main/LICENSE) for more details.
+GPLv2.0 - Check [LICENSE](https://github.com/Serial-Link/serial/blob/main/LICENSE) for more details.
 
 Feel free to contribute to this project.
 
-Copyright 2024 © Paul & Max
+Copyright © Paul & Max

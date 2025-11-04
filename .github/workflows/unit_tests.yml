@@ -1,36 +1,33 @@
-name: Unit Tests
-
+name: 'Run Unit Tests'
 on:
   push:
-    branches: ["main"]
+    branches: 
+      - 'main'
 
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
   checks: write
 
 jobs:
-  test:
-    name: Unit Test
+  unit-test:
+    name: 'Unit Test'
     runs-on: ubuntu-latest
-    env:
-      deno-version: v1.x
 
     steps:
-      - name: Setup Repository (${{github.event.repository.name}})
-        uses: actions/checkout@v3
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v5
 
-      - name: Setup Deno (${{env.deno-version}})
-        uses: denoland/setup-deno@v1
+      - name: 'Setup Deno'
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: ${{env.deno-version}}
+          deno-version: 'v2.x'
       
-      - name: Run Tests
-        run: deno test -A --unstable --check --reload --doc --allow-none --junit-path="./report.xml"
+      - name: 'Run Tests'
+        run: deno task test
 
-      - name: Generate jUnit Report
-        uses: mikepenz/action-junit-report@v3.8.0
+      - name: 'Generate jUnit Report'
+        uses: mikepenz/action-junit-report@v6
+        if: success() || failure()
         with:
-          report_paths: 'report.xml'
+          report_paths: 'reports/report.xml'
