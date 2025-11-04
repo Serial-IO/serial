@@ -4,6 +4,7 @@
     "jsr:@loat-dev/lint-plugins@0.1.3": "0.1.3",
     "jsr:@loat-dev/lint-plugins@0.1.4": "0.1.4",
     "jsr:@loat-dev/lint-plugins@0.1.5": "0.1.5",
+    "jsr:@loat-dev/lint-plugins@0.1.6": "0.1.6",
     "jsr:@loat-dev/lint-plugins@~0.1.2": "0.1.2"
   },
   "jsr": {
@@ -18,6 +19,9 @@
     },
     "@loat-dev/lint-plugins@0.1.5": {
       "integrity": "6a182b2f1889dce2f5eebdc40e41d7e6b2faa276dd5d311545151a0d2b67706b"
+    },
+    "@loat-dev/lint-plugins@0.1.6": {
+      "integrity": "f8704d7c24bedb04bee218b7e911bc9e4e3e4192daae9c1264f04eb0e501dad6"
     }
   },
   "workspace": {

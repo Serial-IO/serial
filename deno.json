@@ -39,7 +39,7 @@
   },
   "lint": {
     "plugins": [
-      "jsr:@loat-dev/lint-plugins@0.1.5/colon_spacing"
+      "jsr:@loat-dev/lint-plugins@0.1.6/colon_spacing"
     ],
     "rules": {
       "tags": [
