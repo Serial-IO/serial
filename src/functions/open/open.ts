@@ -19,6 +19,6 @@ export function open(
   parity : Parity,
   stopBits : StopBits,
   errorCallback : ErrorCallback
-) {
+) : void {
 
 }

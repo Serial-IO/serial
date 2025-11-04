@@ -21,7 +21,7 @@ const dll = Deno.dlopen(
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
-function cString(str: string): Uint8Array {
+function cString(str: string) : Uint8Array {
     // Encodes JavaScript string as null-terminated UTF-8 byte array.
     const bytes = encoder.encode(str);
     const buf = new Uint8Array(bytes.length + 1);
@@ -30,7 +30,7 @@ function cString(str: string): Uint8Array {
     return buf;
 }
 
-function pointer(view: Uint8Array): Deno.PointerValue {
+function pointer(view: Uint8Array) : Deno.PointerValue {
     return Deno.UnsafePointer.of(view);
 }
 
@@ -43,7 +43,7 @@ const errorCallback = new Deno.UnsafeCallback(
 
 dll.symbols.serialOnError(errorCallback.pointer);
 
-const verBuf = new Uint8Array(12);                // 3 × 4 Byte
+const verBuf = new Uint8Array(12);                // 3 x 4 Byte
 const verPtr = Deno.UnsafePointer.of(verBuf);
 dll.symbols.getVersion(verPtr);
 const version = new Uint32Array(verBuf.buffer);
@@ -65,7 +65,7 @@ interface PortInfo {
     vendorId: string | undefined;
 }
 
-function cstr(ptr: Deno.PointerValue): string | undefined {
+function cstr(ptr: Deno.PointerValue) : string | undefined {
   if (ptr === null) {
     return undefined;
   }
@@ -176,9 +176,9 @@ const echo = decoder.decode(readBuf.subarray(0, read));
 console.log(`Echo response (${read} bytes): '${echo}'`);
 
 if (echo === msg) {
-    console.log("Echo test: ✅ success");
+    console.log("Echo test: success");
 } else {
-    console.error("Echo test: ❌ mismatch");
+    console.error("Echo test: mismatch");
 }
 
 dll.symbols.serialOnError(null);

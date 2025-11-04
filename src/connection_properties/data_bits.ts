@@ -1,4 +1,4 @@
-import { TypeFromObject } from "../type/conversion/type_from_object.ts";
+import type { TypeFromObject } from "../type/conversion/type_from_object.ts";
 
 /**
  * Available data bits.

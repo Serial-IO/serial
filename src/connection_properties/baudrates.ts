@@ -1,4 +1,4 @@
-import { TypeFromArray } from "../type/conversion/type_from_array.ts";
+import type { TypeFromArray } from "../type/conversion/type_from_array.ts";
 
 /**
  * Common default baudrates.
