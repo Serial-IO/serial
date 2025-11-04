@@ -21,7 +21,7 @@ const dll = Deno.dlopen(
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
-function cString(str: string) : Uint8Array {
+function cString(str : string) : Uint8Array {
     // Encodes JavaScript string as null-terminated UTF-8 byte array.
     const bytes = encoder.encode(str);
     const buf = new Uint8Array(bytes.length + 1);
@@ -30,13 +30,13 @@ function cString(str: string) : Uint8Array {
     return buf;
 }
 
-function pointer(view: Uint8Array) : Deno.PointerValue {
+function pointer(view : Uint8Array) : Deno.PointerValue {
     return Deno.UnsafePointer.of(view);
 }
 
 const errorCallback = new Deno.UnsafeCallback(
   { parameters: ["i32", "buffer"], result: "void" },
-  (code: number) => {
+  (code : number) => {
       console.error(`Serial-Error! Code = ${code}`);
   },
 );
@@ -55,24 +55,24 @@ console.log(`Version ${version[0]}.${version[1]}.${version[2]}`);
 // 1. List available ports
 // -----------------------------------------------------------------------------
 interface PortInfo {
-    port: string | undefined;
-    path: string | undefined;
-    manufacturer: string | undefined;
-    serial: string | undefined;
-    pnpId: string | undefined;
-    location: string | undefined;
-    productId: string | undefined;
-    vendorId: string | undefined;
+    port : string | undefined;
+    path : string | undefined;
+    manufacturer : string | undefined;
+    serial : string | undefined;
+    pnpId : string | undefined;
+    location : string | undefined;
+    productId : string | undefined;
+    vendorId : string | undefined;
 }
 
-function cstr(ptr: Deno.PointerValue) : string | undefined {
+function cstr(ptr : Deno.PointerValue) : string | undefined {
   if (ptr === null) {
     return undefined;
   }
   return Deno.UnsafePointerView.getCString(ptr);
 }
 
-const portInfos: PortInfo[] = [];
+const portInfos : PortInfo[] = [];
 
 const collectCb = new Deno.UnsafeCallback({
     parameters: [
