@@ -1,4 +1,4 @@
-import type { Parity, StopBits, Baudrate, DataBits } from "../../connection_properties/index.ts";
+import type { Parity, StopBits, Baudrate, DataBits } from "../../connection/index.ts";
 import type { ErrorCallback } from "../error_callback.ts";
 
 /**
