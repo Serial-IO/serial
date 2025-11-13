@@ -7,7 +7,7 @@ import type { Options } from './options.ts';
  * 
  * @example
  * ```ts
- * const devices = await Serial.getAvailableDevices();
+ * const devices = await Serial.getDevices();
  * 
  * devices.forEach((device) => {
  *   console.log(`Found device "${device.manufacturer}" on port "${device.port}".`);
@@ -66,7 +66,7 @@ export class Serial {
    * 
    * @example
    * ```ts
-   * const devices = await Serial.getAvailableDevices();
+   * const devices = await Serial.getDevices();
    * 
    * devices.forEach((device) => {
    *   console.log(`Found device "${device.manufacturer}" on port "${device.port}".`);
@@ -75,7 +75,7 @@ export class Serial {
    * ```
    * @returns A list of available devices.
    */
-  public static getAvailableDevices() : Promise<Device[]> {
+  public static getDevices() : Promise<Device[]> {
     return new Promise((resolve) => resolve([]))
   }
 
