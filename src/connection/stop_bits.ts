@@ -1,4 +1,4 @@
-import type { TypeFromObject } from "../type/conversion/type_from_object.ts";
+import type { conversion } from '../type/index.ts';
 
 /**
  * Available stop bits.
@@ -11,4 +11,4 @@ export const stopBits = {
 /**
  * This type represents the stop bits.
  */
-export type StopBits = TypeFromObject<typeof stopBits>
+export type StopBits = conversion.TypeFromObjectValues<typeof stopBits>

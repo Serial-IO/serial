@@ -1,4 +1,4 @@
-import type { TypeFromObject } from "../type/conversion/type_from_object.ts";
+import type { conversion } from '../type/index.ts';
 
 /**
  * Available data bits.
@@ -13,4 +13,4 @@ export const dataBits = {
 /**
  * This type represents data bits.
  */
-export type DataBits = TypeFromObject<typeof dataBits>;
+export type DataBits = conversion.TypeFromObjectValues<typeof dataBits>;

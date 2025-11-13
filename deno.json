@@ -1,10 +1,12 @@
 {
   "name": "@serial/serial",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "./LICENSE",
   "exports": {
     ".": "./src/index.ts",
-    "./connection": "./src/connection/index.ts"
+    "./connection": "./src/connection/index.ts",
+    "./read": "./src/operations/read/index.ts",
+    "./write": "./src/operations/read/index.ts"
   },
   "tasks": {
     "clear-reports": "rm -r ./reports/* || exit 0",
@@ -40,9 +42,8 @@
   },
   "lint": {
     "plugins": [
-      "jsr:@loat-dev/lint-plugins@0.3.2/colon_spacing",
-      "jsr:@loat-dev/lint-plugins@0.3.2/imports",
-      "jsr:@loat-dev/lint-plugins@0.3.2/arrays"
+      "jsr:@loat-dev/lint-plugins@0.3.12/imports",
+      "jsr:@loat-dev/lint-plugins@0.3.12/arrays"
     ],
     "rules": {
       "tags": [

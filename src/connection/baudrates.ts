@@ -1,4 +1,4 @@
-import type { TypeFromArray } from "../type/conversion/type_from_array.ts";
+import type { conversion, extend } from "../type/index.ts";
 
 /**
  * Common default baudrates.
@@ -23,6 +23,4 @@ export const baudrates = [
 /**
  * This type represents a baudrate.
  */
-// (number & {}) converts number to generic object, needed for autocompletion
-// deno-lint-ignore ban-types
-export type Baudrate = TypeFromArray<typeof baudrates> | (number & {});
+export type Baudrate = extend.GenericNumber<conversion.TypeFromArray<typeof baudrates>>;

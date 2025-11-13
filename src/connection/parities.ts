@@ -1,4 +1,4 @@
-import type { TypeFromObject } from "../type/conversion/type_from_object.ts";
+import type { conversion } from '../type/index.ts';
 
 /**
  * Available parities.
@@ -13,5 +13,5 @@ export const parities = {
 
 /**
  * This type represents the parity.
- */
-export type Parity = TypeFromObject<typeof parities>
+*/
+export type Parity = conversion.TypeFromObjectValues<typeof parities>

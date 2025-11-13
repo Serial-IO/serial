@@ -1,2 +1,1 @@
-export { Serial } from './serial.ts'
 export type { Options } from './options.ts'
