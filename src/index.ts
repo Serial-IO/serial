@@ -1,6 +1,27 @@
 /**
  * This module contains functions and types for the serial communication.
  * 
+ * @example
+ * ```ts
+ * const devices = await Serial.getDevices();
+ * 
+ * devices.forEach((device) => {
+ *   console.log(`Found device "${device.manufacturer}" on port "${device.port}".`);
+ *   // Found device "Arduino (www.arduino.cc)" on port "COM5".
+ * });
+ * 
+ * 
+ * const serial = new Serial('COM5');
+ * 
+ * const buffer = new Uint8Array(256);
+ * const bytesRead = await serial.read(buffer);
+ * 
+ * const data = new TextDecoder().decode(buffer);
+ * 
+ * console.log(`Read ${bytesRead} byte(s), data:\n${data}`);
+ * // Read 12 byte(s), data:
+ * // Hello World!
+ * ```
  * @module
  */
 
