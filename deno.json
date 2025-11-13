@@ -1,12 +1,12 @@
 {
   "name": "@serial/serial",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "./LICENSE",
   "exports": {
     ".": "./src/index.ts",
     "./connection": "./src/connection/index.ts",
     "./read": "./src/operations/read/index.ts",
-    "./write": "./src/operations/read/index.ts"
+    "./write": "./src/operations/write/index.ts"
   },
   "tasks": {
     "clear-reports": "rm -r ./reports/* || exit 0",
