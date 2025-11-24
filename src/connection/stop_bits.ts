@@ -4,11 +4,11 @@ import type { conversion } from '../type/index.ts';
  * Available stop bits.
  */
 export const stopBits = {
-  ONE: 0,
-  TWO: 1
+  ONE: 'ONE',
+  TWO: 'TWO'
 } as const;
 
 /**
  * This type represents the stop bits.
  */
-export type StopBits = conversion.TypeFromObjectValues<typeof stopBits>
+export type StopBits = conversion.TypeFromObjectKeys<typeof stopBits>

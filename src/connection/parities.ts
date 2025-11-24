@@ -4,14 +4,14 @@ import type { conversion } from '../type/index.ts';
  * Available parities.
  */
 export const parities = {
-  NONE: 0,
-  EVEN: 1,
-  MARK: 2,
-  ODD: 3,
-  SPACE: 4
+  NONE: 'NONE',
+  EVEN: 'EVEN',
+  MARK: 'MARK',
+  ODD: 'ODD',
+  SPACE: 'SPACE'
 } as const;
 
 /**
  * This type represents the parity.
 */
-export type Parity = conversion.TypeFromObjectValues<typeof parities>
+export type Parity = conversion.TypeFromObjectKeys<typeof parities>

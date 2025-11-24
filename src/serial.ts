@@ -2,6 +2,7 @@ import { dataBits, parities, stopBits, type Device } from './connection/index.ts
 import type { read, write } from './operations/index.ts';
 import type { Options } from './options.ts';
 
+
 /**
  * This class represents a serial instance.
  * 
@@ -34,6 +35,7 @@ export class Serial {
    * @readonly
    */
   public readonly port : string;
+  private connectionIsOpen : boolean;
   private readonly options : Options;
 
   /**
@@ -46,6 +48,7 @@ export class Serial {
     port : string,
     options? : Options
   ) {
+    this.connectionIsOpen = false;
     this.port = port;
     this.options = Object.assign<
       Options,
@@ -77,6 +80,35 @@ export class Serial {
    */
   public static getDevices() : Promise<Device[]> {
     return new Promise((resolve) => resolve([]))
+  }
+
+  /**
+   * Returns the current state of the connection; `true` if open; `false` if closed.
+   * 
+   * @returns If the serial connection is open.
+   */
+  public get isOpen() : boolean {
+    return this.connectionIsOpen;
+  }
+
+  /**
+   * Open the serial connection.
+   * 
+   * @returns This instance.
+   */
+  public open() : this {
+    this.connectionIsOpen = true;
+    return this;
+  }
+
+  /**
+   * Close the serial connection.
+   * 
+   * @returns This instance.
+   */
+  public close() : this {
+    this.connectionIsOpen = false;
+    return this;
   }
 
   /**
