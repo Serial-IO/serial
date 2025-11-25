@@ -35,8 +35,8 @@ export class Serial {
    * @readonly
    */
   public readonly port : string;
-  private connectionIsOpen : boolean;
   private readonly options : Options;
+  private _isOpen : boolean;
 
   /**
    * Create an new serial instance.
@@ -48,7 +48,7 @@ export class Serial {
     port : string,
     options? : Options
   ) {
-    this.connectionIsOpen = false;
+    this._isOpen = false;
     this.port = port;
     this.options = Object.assign<
       Options,
@@ -88,7 +88,7 @@ export class Serial {
    * @returns If the serial connection is open.
    */
   public get isOpen() : boolean {
-    return this.connectionIsOpen;
+    return this._isOpen;
   }
 
   /**
@@ -97,7 +97,7 @@ export class Serial {
    * @returns This instance.
    */
   public open() : this {
-    this.connectionIsOpen = true;
+    this._isOpen = true;
     return this;
   }
 
@@ -107,7 +107,7 @@ export class Serial {
    * @returns This instance.
    */
   public close() : this {
-    this.connectionIsOpen = false;
+    this._isOpen = false;
     return this;
   }
 
