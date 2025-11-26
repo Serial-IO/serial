@@ -1,12 +1,20 @@
 {
   "name": "@serial/serial",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "license": "./LICENSE",
   "exports": {
     ".": "./src/index.ts",
     "./connection": "./src/connection/index.ts",
     "./read": "./src/operations/read/index.ts",
     "./write": "./src/operations/write/index.ts"
+  },
+  "publish": {
+    "include": [
+      "README.md",
+      "LICENSE",
+      "deno.json",
+      "src/**"
+    ]
   },
   "tasks": {
     "clear-reports": "rm -r ./reports/* || exit 0",
