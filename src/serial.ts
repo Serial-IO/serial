@@ -1,4 +1,4 @@
-import { dataBits, parities, stopBits, type Device } from './connection/index.ts';
+import { dataBits, parities, stopBits, type Port } from './connection/index.ts';
 import type { read, write } from './operations/index.ts';
 import type { Options } from './options.ts';
 
@@ -8,10 +8,10 @@ import type { Options } from './options.ts';
  * 
  * @example
  * ```ts
- * const devices = await Serial.getDevices();
+ * const ports = await Serial.listPorts();
  * 
- * devices.forEach((device) => {
- *   console.log(`Found device "${device.manufacturer}" on port "${device.port}".`);
+ * ports.forEach((port) => {
+ *   console.log(`Found device "${port.manufacturer}" on port "${port.name}".`);
  *   // Found device "Arduino (www.arduino.cc)" on port "COM5".
  * });
  * 
@@ -65,20 +65,20 @@ export class Serial {
   }
 
   /**
-   * Get a list of available serial devices.
+   * List all available serial ports.
    * 
    * @example
    * ```ts
-   * const devices = await Serial.getDevices();
+   * const ports = await Serial.listPorts();
    * 
-   * devices.forEach((device) => {
-   *   console.log(`Found device "${device.manufacturer}" on port "${device.port}".`);
+   * ports.forEach((port) => {
+   *   console.log(`Found device "${port.manufacturer}" on port "${port.name}".`);
    *   // Found device "Arduino (www.arduino.cc)" on port "COM5".
    * });
    * ```
-   * @returns A list of available devices.
+   * @returns A list of available ports.
    */
-  public static getDevices() : Promise<Device[]> {
+  public static listPorts() : Promise<Port[]> {
     return new Promise((resolve) => resolve([]))
   }
 

@@ -1,11 +1,11 @@
 /**
- * This interface represents a device object.
+ * This interface represents a port object.
  */
-export interface Device {
+export interface Port {
   /**
    * The name of the port (ex. `ttyACM2`, `COM5`, ...)
    */
-  port : string,
+  name : string,
 
   /**
    * The full path to the port. (ex. `/dev/ttyACM2`, `\\\\?\\acpi#pnp0501#0#{86e0d1e0-8089-11d0-9ce4-08003e301f73}`, ...)
@@ -13,17 +13,17 @@ export interface Device {
   path : string,
 
   /**
-   * The manufacturer of the device. (ex. `Arduino (www.arduino.cc)`, `Arduino LLC (www.arduino.cc)`, ...)
+   * The manufacturer of the device, connected to the port. (ex. `Arduino (www.arduino.cc)`, `Arduino LLC (www.arduino.cc)`, ...)
    */
   manufacturer : string | undefined,
   
   /**
-   * The serial number of the device. (ex. `698471028216477376C1`, ...)
+   * The serial number of the device, connected to the port. (ex. `698471028216477376C1`, ...)
    */
   serialNumber : string | undefined,
 
   /**
-   * The Plug and Play ID of the device. (ex. `usb-Arduino__www.arduino.cc__0043_698471028216477376-if00`,
+   * The Plug and Play ID of the device, connected to the port. (ex. `usb-Arduino__www.arduino.cc__0043_698471028216477376-if00`,
    * `USB\\VID_5678&PID_1234\\698471028216477376`, ...)
    */
   pnpId : string | undefined,
@@ -34,12 +34,12 @@ export interface Device {
   locationId : string | undefined,
 
   /**
-   * The product ID of the device. (ex. `1234`)
+   * The product ID of the device, connected to the port. (ex. `1234`)
    */
   productId : string | undefined,
 
   /**
-   * The vendor ID of the device. (ex. `5678`)
+   * The vendor ID of the device, connected to the port. (ex. `5678`)
    */
   vendorId : string | undefined
 }

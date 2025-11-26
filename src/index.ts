@@ -3,10 +3,10 @@
  * 
  * @example
  * ```ts
- * const devices = await Serial.getDevices();
+ * const ports = await Serial.listPorts();
  * 
- * devices.forEach((device) => {
- *   console.log(`Found device "${device.manufacturer}" on port "${device.port}".`);
+ * ports.forEach((port) => {
+ *   console.log(`Found device "${port.manufacturer}" on port "${port.name}".`);
  *   // Found device "Arduino (www.arduino.cc)" on port "COM5".
  * });
  * 
