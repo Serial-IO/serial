@@ -29,4 +29,9 @@ jobs:
           deno-version: 'v2.x'
 
       - name: 'Publish package'
-        run: deno publish
+        run: |
+          if [ "${{ github.event.inputs.dry }}" = "true" ]; then
+            deno publish --dry-run
+          else
+            deno publish
+          fi
