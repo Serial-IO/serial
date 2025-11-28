@@ -1,0 +1,51 @@
+name: 'Bug Report'
+description: 'File a bug report.'
+labels: ['Bug', 'Help Wanted']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bug reports for the Serial library!
+
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: Validations
+      description: 'Before submitting the issue, please make sure you do the following'
+      options:
+        - label: "Check that there isn't already an issue that reports the same bug to avoid creating a duplicate."
+          required: true
+
+  - type: input
+    id: serial-library-version
+    attributes:
+      label: 'Serial library version'
+      description: 'What version of the Serial library did you use when encountering the bug?'
+      placeholder: 'ex. v1.2.0'
+    validations:
+      required: true
+
+  - type: input
+    id: deno-version
+    attributes:
+      label: 'Deno version'
+      description: 'What version of Deno do you use? Use `deno -V` to get the version of Deno.'
+      placeholder: 'ex. v2.5.1'
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: What happened?
+      description: 'What did you expect to happen?'
+      placeholder: 'Tell us, what kind of bug you did encounter...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-message
+    attributes:
+      label: 'Log output (ex. errors)'
+      description: 'Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.'
+      render: text
