@@ -1,4 +1,4 @@
-name: 'Run Linter'
+name: 'Lint'
 on:
   push:
     branches: 
