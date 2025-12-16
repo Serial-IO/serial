@@ -8,7 +8,7 @@ on:
     inputs:
       dry:
         description: Dry run. Do not publish package.
-        default: false
+        default: true
         type: boolean
 
 permissions:

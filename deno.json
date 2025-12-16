@@ -1,13 +1,12 @@
 {
   "name": "@serial/serial",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "license": "./LICENSE",
   "exports": {
     ".": "./src/index.ts",
     "./connection": "./src/connection/index.ts",
     "./read": "./src/operations/read/index.ts",
-    "./write": "./src/operations/write/index.ts",
-    "./test": "./test/add.ts"
+    "./write": "./src/operations/write/index.ts"
   },
   "publish": {
     "include": [
@@ -15,9 +14,7 @@
       "LICENSE",
       "deno.json",
       "deno.lock",
-      "src/**",
-      "test/add.ts",
-      "test/add.dll"
+      "src/**"
     ]
   },
   "unstable": [
