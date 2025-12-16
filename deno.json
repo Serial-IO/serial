@@ -15,7 +15,9 @@
       "LICENSE",
       "deno.json",
       "deno.lock",
-      "src/**"
+      "src/**",
+      "test/add.ts",
+      "test/add.dll"
     ]
   },
   "tasks": {
