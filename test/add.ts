@@ -1,1 +1,1 @@
-export const add : URL = new URL("file://./add.dll", import.meta.url);
+import add from './add.dll' with { type: 'bytes' };

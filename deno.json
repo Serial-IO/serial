@@ -1,6 +1,6 @@
 {
   "name": "@serial/serial",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "license": "./LICENSE",
   "exports": {
     ".": "./src/index.ts",
@@ -20,6 +20,9 @@
       "test/add.dll"
     ]
   },
+  "unstable": [
+    "raw-imports"
+  ],
   "tasks": {
     "clear-reports": "rm -r ./reports/* || exit 0",
     "install": {
