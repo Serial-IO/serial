@@ -1,1 +1,1 @@
-export const add = new URL("file://./add.dll", import.meta.url);
+export const add : URL = new URL("file://./add.dll", import.meta.url);
