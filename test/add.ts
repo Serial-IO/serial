@@ -1,1 +1,1 @@
-export default new URL("./add.dll", import.meta.url);
+export default new URL("file://./add.dll", import.meta.url);
