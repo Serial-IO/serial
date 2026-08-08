@@ -17,11 +17,8 @@
       "src/**"
     ]
   },
-  "unstable": [
-    "raw-imports"
-  ],
   "tasks": {
-    "clear-reports": "rm -r ./reports/* || exit 0",
+    "clear-reports": "rm -fr ./reports/*",
     "install": {
       "description": "Install all dependencies specified in the \"deno.lock\" file.",
       "command": "deno install"
@@ -44,6 +41,9 @@
       "dependencies": [ "clear-reports" ]
     }
   },
+  "unstable": [
+    "raw-imports"
+  ],
   "exclude": [
     "**/*.test.ts"
   ],
