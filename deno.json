@@ -94,6 +94,8 @@
     "typeLiteral.separatorKind": "comma"
   },
   "imports": {
+    "@serial/cpp-bindings-windows": "jsr:@serial/cpp-bindings-windows@2.0.0",
+    "@serial/cpp-bindings-linux": "jsr:@serial/cpp-bindings-linux@^3.0.0",
     "@std/cli": "jsr:@std/cli@^1.0.6",
     "@std/fmt": "jsr:@std/fmt@^1.0.2"
   }
