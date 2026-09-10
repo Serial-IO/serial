@@ -4,4 +4,4 @@
  * @module
  */
 
-export type { meta } from './meta.ts'
+export { symbol } from './symbol.ts'
