@@ -1,0 +1,2618 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Katze719/ASTrein/main/schema/astrein-ffi-api-v3.schema.json",
+  "enums": [
+    {
+      "alignment": 4,
+      "declaredIn": "cpp_core/strong_types.hpp",
+      "doc": {
+        "brief": "Number of data bits contained in each serial frame."
+      },
+      "name": "cpp_core::DataBits",
+      "scoped": true,
+      "size": 4,
+      "underlyingType": "int",
+      "values": [
+        {
+          "doc": {
+            "brief": "Use five data bits."
+          },
+          "name": "kFive",
+          "value": "5"
+        },
+        {
+          "doc": {
+            "brief": "Use six data bits."
+          },
+          "name": "kSix",
+          "value": "6"
+        },
+        {
+          "doc": {
+            "brief": "Use seven data bits."
+          },
+          "name": "kSeven",
+          "value": "7"
+        },
+        {
+          "doc": {
+            "brief": "Use eight data bits."
+          },
+          "name": "kEight",
+          "value": "8"
+        }
+      ]
+    },
+    {
+      "alignment": 4,
+      "declaredIn": "cpp_core/strong_types.hpp",
+      "doc": {
+        "brief": "Flow-control mode used by the serial port."
+      },
+      "name": "cpp_core::FlowControl",
+      "scoped": true,
+      "size": 4,
+      "underlyingType": "int",
+      "values": [
+        {
+          "doc": {
+            "brief": "Disable flow control."
+          },
+          "name": "kNone",
+          "value": "0"
+        },
+        {
+          "doc": {
+            "brief": "Use hardware RTS/CTS flow control."
+          },
+          "name": "kRtsCts",
+          "value": "1"
+        },
+        {
+          "doc": {
+            "brief": "Use software XON/XOFF flow control."
+          },
+          "name": "kXonXoff",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "alignment": 4,
+      "declaredIn": "cpp_core/strong_types.hpp",
+      "doc": {
+        "brief": "Parity mode used for serial communication."
+      },
+      "name": "cpp_core::Parity",
+      "scoped": true,
+      "size": 4,
+      "underlyingType": "int",
+      "values": [
+        {
+          "doc": {
+            "brief": "Disable parity checking and generation."
+          },
+          "name": "kNone",
+          "value": "0"
+        },
+        {
+          "doc": {
+            "brief": "Use even parity."
+          },
+          "name": "kEven",
+          "value": "1"
+        },
+        {
+          "doc": {
+            "brief": "Use odd parity."
+          },
+          "name": "kOdd",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "alignment": 4,
+      "declaredIn": "cpp_core/strong_types.hpp",
+      "doc": {
+        "brief": "Port lifecycle event reported by serialSetEventCallback()."
+      },
+      "name": "cpp_core::PortEvent",
+      "scoped": true,
+      "size": 4,
+      "underlyingType": "int",
+      "values": [
+        {
+          "doc": {
+            "brief": "A serial port was removed from the system."
+          },
+          "name": "kDetached",
+          "value": "0"
+        },
+        {
+          "doc": {
+            "brief": "A serial port became available."
+          },
+          "name": "kAttached",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "alignment": 4,
+      "declaredIn": "cpp_core/strong_types.hpp",
+      "doc": {
+        "brief": "Number of stop bits appended to each serial frame."
+      },
+      "name": "cpp_core::StopBits",
+      "scoped": true,
+      "size": 4,
+      "underlyingType": "int",
+      "values": [
+        {
+          "doc": {
+            "brief": "Use one stop bit."
+          },
+          "name": "kOne",
+          "value": "0"
+        },
+        {
+          "doc": {
+            "brief": "Use two stop bits."
+          },
+          "name": "kTwo",
+          "value": "2"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "declaredIn": "cpp_core/interface/meta.h",
+      "doc": {
+        "brief": "Copy metadata for the loaded library."
+      },
+      "name": "meta",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Structure receiving the metadata. Passing `nullptr` is a no-op.",
+            "direction": "out"
+          },
+          "name": "out",
+          "size": 8,
+          "type": "cpp_core::Meta *"
+        }
+      ],
+      "returnType": "void",
+      "symbol": "meta"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_abort_read.h",
+      "doc": {
+        "brief": "Abort a blocking read operation running in a different thread.",
+        "details": [
+          "The target read function returns immediately with ::cpp_core::StatusCode::Io::kAbortReadError."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialAbortRead",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialAbortRead"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_abort_write.h",
+      "doc": {
+        "brief": "Abort a blocking write operation running in a different thread.",
+        "details": [
+          "The target write function returns immediately with ::cpp_core::StatusCode::Io::kAbortWriteError."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialAbortWrite",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialAbortWrite"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_clear_buffer_in.h",
+      "doc": {
+        "brief": "Clear (flush) the device's input buffer.",
+        "details": [
+          "Discards every byte the driver has already received but the application has not yet read."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialClearBufferIn",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialClearBufferIn"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_clear_buffer_out.h",
+      "doc": {
+        "brief": "Clear (flush) the device's output buffer.",
+        "details": [
+          "Blocks until all queued bytes have been transmitted and then discards any remaining data."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialClearBufferOut",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialClearBufferOut"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_close.h",
+      "doc": {
+        "brief": "Close a previously opened serial port.",
+        "details": [
+          "The handle becomes invalid after the call. Passing an already invalid (< = 0) handle is a no-op."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialClose",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialClose"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_baudrate.h",
+      "doc": {
+        "brief": "Query the current baud rate of an open serial port.",
+        "details": [
+          "Reads back the baud rate that the OS driver is currently using. Useful for verifying that serialOpen() or serialSetBaudrate() applied the requested value."
+        ],
+        "returns": "Current baud rate in bit/s (>= 300) or a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetBaudrate",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialGetBaudrate"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_cts.h",
+      "doc": {
+        "brief": "Read the current state of the Clear To Send (CTS) input line.",
+        "details": [
+          "CTS is asserted by the remote device to indicate it is ready to receive data. Polling this line is useful when manual flow-control logic is required instead of (or in addition to) automatic RTS/CTS flow control."
+        ],
+        "returns": "1 if asserted (HIGH), 0 if de-asserted (LOW), or a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetCts",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialGetCts"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_data_bits.h",
+      "doc": {
+        "brief": "Query the current number of data bits of an open serial port.",
+        "returns": "Current data-bit setting. On error, the underlying integer value is a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetDataBits",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "cpp_core::DataBits",
+      "symbol": "serialGetDataBits"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_dcd.h",
+      "doc": {
+        "brief": "Read the current state of the Data Carrier Detect (DCD) input line.",
+        "details": [
+          "DCD is asserted by a modem when a carrier signal has been detected on the telephone line. For direct serial links it can serve as a general-purpose \"connection alive\"indicator."
+        ],
+        "returns": "1 if asserted (HIGH), 0 if de-asserted (LOW), or a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetDcd",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialGetDcd"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_dsr.h",
+      "doc": {
+        "brief": "Read the current state of the Data Set Ready (DSR) input line.",
+        "details": [
+          "DSR is asserted by the remote device to indicate it is powered on and ready to communicate. It is the counterpart to DTR."
+        ],
+        "returns": "1 if asserted (HIGH), 0 if de-asserted (LOW), or a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetDsr",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialGetDsr"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_flow_control.h",
+      "doc": {
+        "brief": "Query the current flow-control mode of an open serial port.",
+        "returns": "Current flow-control mode. On error, the underlying integer value is a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetFlowControl",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "cpp_core::FlowControl",
+      "symbol": "serialGetFlowControl"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_parity.h",
+      "doc": {
+        "brief": "Query the current parity setting of an open serial port.",
+        "returns": "Current parity mode. On error, the underlying integer value is a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetParity",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "cpp_core::Parity",
+      "symbol": "serialGetParity"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_ri.h",
+      "doc": {
+        "brief": "Read the current state of the Ring Indicator (RI) input line.",
+        "details": [
+          "RI is asserted by a modem to signal an incoming call. On non-modem hardware it can be repurposed as a general-purpose input signal."
+        ],
+        "returns": "1 if asserted (HIGH), 0 if de-asserted (LOW), or a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetRi",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialGetRi"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_get_stop_bits.h",
+      "doc": {
+        "brief": "Query the current stop-bit setting of an open serial port.",
+        "returns": "Current stop-bit setting. On error, the underlying integer value is a negative error code from ::cpp_core::StatusCode."
+      },
+      "name": "serialGetStopBits",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "cpp_core::StopBits",
+      "symbol": "serialGetStopBits"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_in_bytes_total.h",
+      "doc": {
+        "brief": "Total number of bytes received since the port was opened.",
+        "returns": "Total number of bytes read or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialInBytesTotal",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 8,
+      "returnSize": 8,
+      "returnType": "int64_t",
+      "symbol": "serialInBytesTotal"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_in_bytes_waiting.h",
+      "doc": {
+        "brief": "Query how many bytes are immediately available to read.",
+        "details": [
+          "The number reflects the size of the driver's RX FIFO **after** accounting for data already consumed by the application. A value of `0` therefore means a read call would have to wait for the next byte to arrive.",
+          "```cpp\nconstexpr cpp_core::SerialTimeoutConfig timeout{.timeout_ms = 0, .multiplier = 1};\nint pending = serialInBytesWaiting(h);\nif (pending > 0) {\n    serialRead(h, buf, pending, &timeout); // returns immediately\n}\n```"
+        ],
+        "returns": "Bytes available for instant reading or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialInBytesWaiting",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialInBytesWaiting"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_list_ports.h",
+      "doc": {
+        "brief": "Enumerate all available serial ports on the system.",
+        "details": [
+          "The supplied callback is invoked once for every discovered port. All string parameters may be `nullptr` if the information is unknown."
+        ],
+        "returns": "Number of ports found or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialListPorts",
+      "parameters": [
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 8,
+                "name": "port",
+                "size": 8,
+                "type": "const char *"
+              },
+              {
+                "alignment": 8,
+                "name": "path",
+                "size": 8,
+                "type": "const char *"
+              },
+              {
+                "alignment": 8,
+                "name": "manufacturer",
+                "size": 8,
+                "type": "const char *"
+              },
+              {
+                "alignment": 8,
+                "name": "serial_number",
+                "size": 8,
+                "type": "const char *"
+              },
+              {
+                "alignment": 8,
+                "name": "pnp_id",
+                "size": 8,
+                "type": "const char *"
+              },
+              {
+                "alignment": 8,
+                "name": "location_id",
+                "size": 8,
+                "type": "const char *"
+              },
+              {
+                "alignment": 8,
+                "name": "product_id",
+                "size": 8,
+                "type": "const char *"
+              },
+              {
+                "alignment": 8,
+                "name": "vendor_id",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "doc": {
+            "description": "Callback receiving port information.",
+            "direction": "in"
+          },
+          "name": "callback_fn",
+          "size": 8,
+          "type": "void (*)(const char *, const char *, const char *, const char *, const char *, const char *, const char *, const char *)"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialListPorts"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_open.h",
+      "doc": {
+        "brief": "Open and configure a serial port.",
+        "details": [
+          "The function attempts to open the device referenced by `port` and applies the line settings in `config`. `port` is interpreted as a UTF-8 encoded null-terminated string on all platforms."
+        ],
+        "returns": "A positive opaque handle on success or a negative value from ::cpp_core::StatusCode on failure."
+      },
+      "name": "serialOpen",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Null-terminated device identifier (e.g. \"COM3\", \"/dev/ttyUSB0\"). Passing `nullptr` results in a failure.",
+            "direction": "in"
+          },
+          "name": "port",
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Serial line configuration. Includes baud rate, data bits, parity, stop bits, and flow-control mode. Passing `nullptr` results in a failure.",
+            "direction": "in"
+          },
+          "name": "config",
+          "size": 8,
+          "type": "const cpp_core::SerialConfig *"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 8,
+      "returnSize": 8,
+      "returnType": "intptr_t",
+      "symbol": "serialOpen"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_out_bytes_total.h",
+      "doc": {
+        "brief": "Total number of bytes transmitted since the port was opened.",
+        "returns": "Total number of bytes written or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialOutBytesTotal",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 8,
+      "returnSize": 8,
+      "returnType": "int64_t",
+      "symbol": "serialOutBytesTotal"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_out_bytes_waiting.h",
+      "doc": {
+        "brief": "Return the number of bytes that have been accepted by the driver but not yet sent.",
+        "details": [
+          "Useful for gauging transmission progress in the background or for pacing further writes to avoid unbounded buffering.",
+          "```c\nwhile (serialOutBytesWaiting(h) > 0) {\n    usleep(1000); // wait 1 ms and poll again\n}\n```"
+        ],
+        "returns": "Bytes still waiting in the TX FIFO or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialOutBytesWaiting",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialOutBytesWaiting"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_read.h",
+      "doc": {
+        "brief": "Read raw bytes from the serial port.",
+        "details": [
+          "The call blocks for at most `timeout_config->timeout_ms` milliseconds while waiting for the FIRST byte. For every subsequent byte the individual timeout is calculated as `timeout_ms * multiplier` from `timeout_config`."
+        ],
+        "returns": "Bytes read (0 on timeout) or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialRead",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Destination buffer (must not be `nullptr`).",
+            "direction": "in"
+          },
+          "name": "buffer",
+          "size": 8,
+          "type": "std::uint8_t *"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Size of `buffer` in bytes (> 0).",
+            "direction": "in"
+          },
+          "name": "buffer_size",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Timeout settings for this operation. Passing `nullptr` results in a failure.",
+            "direction": "in"
+          },
+          "name": "timeout_config",
+          "size": 8,
+          "type": "const cpp_core::SerialTimeoutConfig *"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialRead"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_read_until_sequence.h",
+      "doc": {
+        "brief": "Read until a specific byte sequence appears.",
+        "details": [
+          "Reads bytes using the same timeout semantics as serialRead() and stops as soon as `sequence` has been received. Sequences may contain zero bytes, and the complete terminator is included in the returned data."
+        ],
+        "returns": "Bytes read (including the terminator) or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialReadUntilSequence",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Destination buffer.",
+            "direction": "in"
+          },
+          "name": "buffer",
+          "size": 8,
+          "type": "std::uint8_t *"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Capacity of `buffer` in bytes.",
+            "direction": "in"
+          },
+          "name": "buffer_size",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Timeout settings for this operation. Passing `nullptr` results in a failure.",
+            "direction": "in"
+          },
+          "name": "timeout_config",
+          "size": 8,
+          "type": "const cpp_core::SerialTimeoutConfig *"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Terminating byte sequence (must not be `nullptr`).",
+            "direction": "in"
+          },
+          "name": "sequence",
+          "size": 8,
+          "type": "const std::uint8_t *"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Size of `sequence` in bytes (> 0).",
+            "direction": "in"
+          },
+          "name": "sequence_size",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialReadUntilSequence"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_send_break.h",
+      "doc": {
+        "brief": "Send a break condition on the serial line.",
+        "details": [
+          "A break is a sustained logic-LOW that lasts longer than a normal character frame. Many protocols rely on it:",
+          "- **DMX512**: A break of >= 88 us marks the start of a new frame. - **LIN bus**: The master starts each frame with a 13-bit break. - **MODBUS RTU**: Some implementations use break for frame sync.",
+          "The `duration_ms` parameter is a *minimum* - the actual break may be slightly longer due to OS scheduling."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSendBreak",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Break duration in milliseconds (> 0).",
+            "direction": "in"
+          },
+          "name": "duration_ms",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSendBreak"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_baudrate.h",
+      "doc": {
+        "brief": "Change the baud rate of an already-open serial port.",
+        "details": [
+          "The new rate takes effect immediately without closing and re-opening the port. All other line settings (data bits, parity, stop bits, flow control) remain unchanged.",
+          "Typical use-case: a bootloader handshake starts at a safe 9600 baud and then both sides switch to a higher speed for the actual data transfer."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetBaudrate",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "New baud rate in bit/s (>= 300).",
+            "direction": "in"
+          },
+          "name": "baudrate",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetBaudrate"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_data_bits.h",
+      "doc": {
+        "brief": "Change the number of data bits on an already-open serial port.",
+        "details": [
+          "Takes effect immediately. All other line settings remain unchanged."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetDataBits",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Number of data bits.",
+            "direction": "in"
+          },
+          "name": "data_bits",
+          "size": 4,
+          "type": "cpp_core::DataBits"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetDataBits"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_dtr.h",
+      "doc": {
+        "brief": "Set or clear the Data Terminal Ready (DTR) modem control line.",
+        "details": [
+          "DTR is commonly used for: - Signalling readiness to the remote device. - Triggering a board reset on Arduino-compatible hardware. - Half-duplex direction control on RS-485 adapters."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetDtr",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Non-zero to assert (HIGH), zero to de-assert (LOW).",
+            "direction": "in"
+          },
+          "name": "state",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetDtr"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_error_callback.h",
+      "doc": {
+        "brief": "Register a callback that is invoked whenever an error occurs.",
+        "details": [
+          "Pass `nullptr` to disable the callback."
+        ]
+      },
+      "name": "serialSetErrorCallback",
+      "parameters": [
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "doc": {
+            "description": "Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`. Gets invoked on any error.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnType": "void",
+      "symbol": "serialSetErrorCallback"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_event_callback.h",
+      "doc": {
+        "brief": "Register or clear the serial-port lifecycle event callback.",
+        "details": [
+          "Passing a non-null callback starts monitoring and invokes it with ::cpp_core::PortEvent::kAttached or ::cpp_core::PortEvent::kDetached. Passing `nullptr` clears the callback and stops monitoring."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetEventCallback",
+      "parameters": [
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "event",
+                "size": 4,
+                "type": "cpp_core::PortEvent"
+              },
+              {
+                "alignment": 8,
+                "name": "port",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "doc": {
+            "description": "Notification callback or `nullptr` to stop monitoring.",
+            "direction": "in"
+          },
+          "name": "callback_fn",
+          "size": 8,
+          "type": "void (*)(cpp_core::PortEvent, const char *)"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetEventCallback"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_flow_control.h",
+      "doc": {
+        "brief": "Configure the flow-control mode for an open serial port.",
+        "details": [
+          "Flow control prevents buffer overruns when one side is slower than the other. Three modes are supported:",
+          "| `flow_mode` | Meaning | |------------------------------|----------------------------------------------| | `FlowControl::kNone` | No flow control. | | `FlowControl::kRtsCts` | Hardware RTS/CTS flow control. | | `FlowControl::kXonXoff` | Software XON/XOFF flow control. |",
+          "Changing the mode on an already-open port takes effect immediately."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetFlowControl",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Flow-control mode.",
+            "direction": "in"
+          },
+          "name": "flow_mode",
+          "size": 4,
+          "type": "cpp_core::FlowControl"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetFlowControl"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_parity.h",
+      "doc": {
+        "brief": "Change the parity setting on an already-open serial port.",
+        "details": [
+          "Takes effect immediately. All other line settings remain unchanged."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetParity",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Parity mode.",
+            "direction": "in"
+          },
+          "name": "parity",
+          "size": 4,
+          "type": "cpp_core::Parity"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetParity"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_read_callback.h",
+      "doc": {
+        "brief": "Register a callback that is invoked whenever bytes are read.",
+        "details": [
+          "Pass `nullptr` to disable the callback."
+        ]
+      },
+      "name": "serialSetReadCallback",
+      "parameters": [
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "bytes_read",
+                "size": 4,
+                "type": "int"
+              }
+            ],
+            "returnType": "void"
+          },
+          "name": "callback_fn",
+          "size": 8,
+          "type": "void (*)(int)"
+        }
+      ],
+      "returnType": "void",
+      "symbol": "serialSetReadCallback"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_rts.h",
+      "doc": {
+        "brief": "Set or clear the Request To Send (RTS) modem control line.",
+        "details": [
+          "RTS is typically used for hardware flow control (RTS/CTS) or as a transmit-enable signal in half-duplex RS-485 setups. When hardware flow control is **not** enabled via serialSetFlowControl(), this function gives manual control over the line."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetRts",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Non-zero to assert (HIGH), zero to de-assert (LOW).",
+            "direction": "in"
+          },
+          "name": "state",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetRts"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_stop_bits.h",
+      "doc": {
+        "brief": "Change the stop-bit setting on an already-open serial port.",
+        "details": [
+          "Takes effect immediately. All other line settings remain unchanged."
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialSetStopBits",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle obtained from serialOpen().",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Stop-bit mode.",
+            "direction": "in"
+          },
+          "name": "stop_bits",
+          "size": 4,
+          "type": "cpp_core::StopBits"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialSetStopBits"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_set_write_callback.h",
+      "doc": {
+        "brief": "Register a callback that is invoked whenever bytes are written.",
+        "details": [
+          "Pass `nullptr` to disable the callback."
+        ]
+      },
+      "name": "serialSetWriteCallback",
+      "parameters": [
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "bytes_written",
+                "size": 4,
+                "type": "int"
+              }
+            ],
+            "returnType": "void"
+          },
+          "name": "callback_fn",
+          "size": 8,
+          "type": "void (*)(int)"
+        }
+      ],
+      "returnType": "void",
+      "symbol": "serialSetWriteCallback"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_wait_for_drain.h",
+      "doc": {
+        "brief": "Wait until the operating-system driver has physically sent every queued byte.",
+        "details": [
+          "The function blocks the *calling thread* until the device driver reports that the transmit FIFO is **empty** - i.e. all bytes handed to previous `serialWrite*` calls have been shifted out on the wire. It does *not* flush higher-level protocol buffers you may have implemented yourself.",
+          "Typical use-case: ensure a complete command frame has left the UART before toggling RTS/DTR or powering down the device.",
+          "```cpp\n// Send a frame and make sure it actually hits the line\nconstexpr cpp_core::SerialTimeoutConfig timeout{.timeout_ms = 50, .multiplier = 1};\nserialWrite(h, frame, frame_len, &timeout);\nif (serialWaitForDrain(h) < 0) {\n    fprintf(stderr, \"drain failed\\n\");\n}\n```"
+        ],
+        "returns": "0 on success or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialWaitForDrain",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialWaitForDrain"
+    },
+    {
+      "declaredIn": "cpp_core/interface/serial_write.h",
+      "doc": {
+        "brief": "Write raw bytes to the serial port.",
+        "details": [
+          "Timeout handling mirrors serialRead(): `timeout_config->timeout_ms` applies to the first byte, `timeout_ms * multiplier` to every subsequent one."
+        ],
+        "returns": "Bytes written (may be 0 on timeout) or a negative error code from ::cpp_core::StatusCode on error."
+      },
+      "name": "serialWrite",
+      "parameters": [
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Port handle.",
+            "direction": "in"
+          },
+          "name": "handle",
+          "size": 8,
+          "type": "int64_t"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Data to transmit (must not be `nullptr`).",
+            "direction": "in"
+          },
+          "name": "buffer",
+          "size": 8,
+          "type": "const std::uint8_t *"
+        },
+        {
+          "alignment": 4,
+          "doc": {
+            "description": "Number of bytes in `buffer` (> 0).",
+            "direction": "in"
+          },
+          "name": "buffer_size",
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "alignment": 8,
+          "doc": {
+            "description": "Timeout settings for this operation. Passing `nullptr` results in a failure.",
+            "direction": "in"
+          },
+          "name": "timeout_config",
+          "size": 8,
+          "type": "const cpp_core::SerialTimeoutConfig *"
+        },
+        {
+          "alignment": 8,
+          "callback": {
+            "parameters": [
+              {
+                "alignment": 4,
+                "name": "error_code",
+                "size": 4,
+                "type": "int"
+              },
+              {
+                "alignment": 8,
+                "name": "message",
+                "size": 8,
+                "type": "const char *"
+              }
+            ],
+            "returnType": "void"
+          },
+          "default": "nullptr",
+          "doc": {
+            "description": "[optional] Callback to invoke on error. Defined in error_callback.h. Default is `nullptr`.",
+            "direction": "in"
+          },
+          "name": "error_callback",
+          "size": 8,
+          "type": "ErrorCallbackT"
+        }
+      ],
+      "returnAlignment": 4,
+      "returnSize": 4,
+      "returnType": "int",
+      "symbol": "serialWrite"
+    }
+  ],
+  "publicHeader": "cpp_core/serial.h",
+  "schema": "astrein_ffi_api",
+  "schemaVersion": 3,
+  "structs": [
+    {
+      "alignment": 8,
+      "declaredIn": "cpp_core/interface/meta.h",
+      "doc": {
+        "brief": "Build and source metadata for the loaded cpp_core-based library."
+      },
+      "fields": [
+        {
+          "doc": {
+            "brief": "Semantic-version major component."
+          },
+          "name": "major",
+          "offset": 0,
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "doc": {
+            "brief": "Semantic-version minor component."
+          },
+          "name": "minor",
+          "offset": 4,
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "doc": {
+            "brief": "Semantic-version patch component."
+          },
+          "name": "patch",
+          "offset": 8,
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "doc": {
+            "brief": "Commits since the closest Git tag."
+          },
+          "name": "commits_since_tag",
+          "offset": 12,
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "doc": {
+            "brief": "1 for uncommitted changes, otherwise 0."
+          },
+          "name": "is_dirty",
+          "offset": 16,
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "doc": {
+            "brief": "Complete generated version string."
+          },
+          "name": "version_string",
+          "offset": 24,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Prerelease identifier, or an empty string."
+          },
+          "name": "prerelease",
+          "offset": 32,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Prerelease kind such as `alpha` or `rc`."
+          },
+          "name": "prerelease_type",
+          "offset": 40,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Prerelease number, or an empty string."
+          },
+          "name": "prerelease_number",
+          "offset": 48,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Closest Git tag."
+          },
+          "name": "git_tag",
+          "offset": 56,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Hash component reported by Git describe."
+          },
+          "name": "git_describe_hash",
+          "offset": 64,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Abbreviated commit hash."
+          },
+          "name": "git_commit_hash_short",
+          "offset": 72,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Full commit hash."
+          },
+          "name": "git_commit_hash_full",
+          "offset": 80,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Commit timestamp including timezone."
+          },
+          "name": "git_commit_date",
+          "offset": 88,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "Branch name used for the build."
+          },
+          "name": "git_branch",
+          "offset": 96,
+          "size": 8,
+          "type": "const char *"
+        },
+        {
+          "doc": {
+            "brief": "`-dirty` or an empty string."
+          },
+          "name": "git_dirty_suffix",
+          "offset": 104,
+          "size": 8,
+          "type": "const char *"
+        }
+      ],
+      "name": "cpp_core::Meta",
+      "size": 112
+    },
+    {
+      "alignment": 4,
+      "declaredIn": "cpp_core/serial_config.hpp",
+      "doc": {
+        "brief": "Compile-time validated serial configuration. Invalid configs are rejected at compile time - no runtime overhead. constexpr auto kCfg = SerialConfig::make<9600, DataBits::kEight, Parity::kNone, StopBits::kOne, FlowControl::kNone>();",
+        "details": [
+          "Compile-time validated serial configuration. Invalid configs are rejected at compile time - no runtime overhead. constexpr auto kCfg = SerialConfig::make < 9600, DataBits::kEight, Parity::kNone, StopBits::kOne, FlowControl::kNone>();"
+        ]
+      },
+      "fields": [
+        {
+          "doc": {
+            "brief": "Baud rate in bit/s (>= 300)."
+          },
+          "name": "baudrate",
+          "offset": 0,
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "doc": {
+            "brief": "Number of data bits."
+          },
+          "name": "data_bits",
+          "offset": 4,
+          "size": 4,
+          "type": "DataBits"
+        },
+        {
+          "doc": {
+            "brief": "Parity mode."
+          },
+          "name": "parity",
+          "offset": 8,
+          "size": 4,
+          "type": "Parity"
+        },
+        {
+          "doc": {
+            "brief": "Stop-bit mode."
+          },
+          "name": "stop_bits",
+          "offset": 12,
+          "size": 4,
+          "type": "StopBits"
+        },
+        {
+          "doc": {
+            "brief": "None, hardware RTS/CTS, or software XON/XOFF flow control."
+          },
+          "name": "flow_mode",
+          "offset": 16,
+          "size": 4,
+          "type": "FlowControl"
+        }
+      ],
+      "name": "cpp_core::SerialConfig",
+      "size": 20
+    },
+    {
+      "alignment": 4,
+      "declaredIn": "cpp_core/serial_config.hpp",
+      "doc": {
+        "brief": "Timeout configuration shared by serial read and write operations. The base timeout applies to the first byte; subsequent bytes use `timeout_ms * multiplier`."
+      },
+      "fields": [
+        {
+          "doc": {
+            "brief": "Base timeout per byte in milliseconds."
+          },
+          "name": "timeout_ms",
+          "offset": 0,
+          "size": 4,
+          "type": "int"
+        },
+        {
+          "doc": {
+            "brief": "Factor applied to the timeout after the first byte."
+          },
+          "name": "multiplier",
+          "offset": 4,
+          "size": 4,
+          "type": "int"
+        }
+      ],
+      "name": "cpp_core::SerialTimeoutConfig",
+      "size": 8
+    }
+  ]
+}
