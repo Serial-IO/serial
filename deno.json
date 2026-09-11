@@ -93,8 +93,6 @@
   "imports": {
     "@serial/cpp-bindings-windows": "jsr:@serial/cpp-bindings-windows@2.0.1",
     "@serial/cpp-bindings-linux": "jsr:@serial/cpp-bindings-linux@^3.0.1",
-    "@std/assert": "jsr:@std/assert@^1.0.19",
-    "@std/cli": "jsr:@std/cli@^1.0.6",
-    "@std/fmt": "jsr:@std/fmt@^1.0.2"
+    "@std/assert": "jsr:@std/assert@^1.0.19"
   }
 }
