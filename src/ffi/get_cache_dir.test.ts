@@ -29,10 +29,11 @@ Deno.test('getCacheDir()', async (test) => {
       "/custom",
     );
   });
+
   await test.step('linux fallback', () => {
     assertEquals(
-      getCacheDir("linux", () => '/custom'),
-      "/custom",
+      getCacheDir("linux", (key) => key === 'XDG_CACHE_HOME' ? undefined : '/custom'),
+      "/custom/.cache"
     );
   });
 });
