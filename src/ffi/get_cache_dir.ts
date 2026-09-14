@@ -34,5 +34,3 @@ export function getCacheDir(
       throw new UnsupportedOSError(os);
   }
 }
-
-getCacheDir('foo')
