@@ -1,4 +1,5 @@
 import type { extend } from '../type/index.ts';
+import { UnsupportedOSError } from './unsupported_os_error.ts';
 
 /**
  * This function returns the selected cache location, based on the os.
@@ -10,18 +11,18 @@ import type { extend } from '../type/index.ts';
 export function getCacheDir(
   os : extend.GenericString<typeof Deno.build.os> = Deno.build.os,
   getEnv : (key : string) => string | undefined = Deno.env.get
-) : string | undefined {
+) : string {
   switch (os) {
     case 'windows':
       return getEnv("LOCALAPPDATA") ??
         `${getEnv("USERPROFILE")}/AppData/Local`;
     
-    case 'darwin':
-      return `${getEnv("HOME")}/Library/Caches`;
-
     case 'linux':
       return getEnv("XDG_CACHE_HOME") ??
         `${getEnv("HOME")}/.cache`;
+
+    case 'darwin':
+      return `${getEnv("HOME")}/Library/Caches`;
     
     case 'aix':
     case 'android':
@@ -29,6 +30,9 @@ export function getCacheDir(
     case 'illumos':
     case 'netbsd':
     case 'solaris':
-      throw new Error('Unsupported OS');
+    default:
+      throw new UnsupportedOSError(os);
   }
 }
+
+getCacheDir('foo')

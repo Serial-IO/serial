@@ -1,5 +1,6 @@
-import { assertEquals } from '@std/assert/equals';
+import { assertEquals, assertThrows } from '@std/assert';
 import { getCacheDir } from './get_cache_dir.ts';
+import { UnsupportedOSError } from './unsupported_os_error.ts';
 
 Deno.test('getCacheDir()', async (test) => {
   await test.step('windows', () => {
@@ -9,7 +10,7 @@ Deno.test('getCacheDir()', async (test) => {
     );
   });
 
-  await test.step('windows fallback', () => {
+  await test.step('windows (fallback)', () => {
     assertEquals(
       getCacheDir("windows", (key) => key === 'LOCALAPPDATA' ? undefined : 'C:/users/foo'),
       "C:/users/foo/AppData/Local"
@@ -30,10 +31,14 @@ Deno.test('getCacheDir()', async (test) => {
     );
   });
 
-  await test.step('linux fallback', () => {
+  await test.step('linux (fallback)', () => {
     assertEquals(
       getCacheDir("linux", (key) => key === 'XDG_CACHE_HOME' ? undefined : '/custom'),
       "/custom/.cache"
     );
   });
+
+  await test.step('unsupported OS', () => {
+    assertThrows(() => getCacheDir("foo"), UnsupportedOSError);
+  })
 });
