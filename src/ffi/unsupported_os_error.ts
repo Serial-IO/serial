@@ -14,7 +14,7 @@ export class UnsupportedOSError extends Error {
     os : string,
     supported : extend.GenericString<typeof Deno.build.os>[] = ['windows', 'linux', 'darwin']
   ) {
-    super(`Unsupported OS: ${os}\nSupported OS: '${supported.join('\', \'')}'`);
+    super(`Unsupported OS\n    Only the following OS are currently supported: '${supported.join('\', \'')}'\n    But got: '${os}'`);
     this.os = os;
   }
 }

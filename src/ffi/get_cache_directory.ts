@@ -6,9 +6,9 @@ import { UnsupportedOSError } from './unsupported_os_error.ts';
  * 
  * @param [os=Deno.build.os] Overwrite the defaulted os
  * @param [getEnv=Deno.env.get] Overwrite the default env getter function
- * @returns The cache path of the os
+ * @returns The cache path of the os.
  */
-export function getCacheDir(
+export function getCacheDirectory(
   os : extend.GenericString<typeof Deno.build.os> = Deno.build.os,
   getEnv : (key : string) => string | undefined = Deno.env.get
 ) : string {
