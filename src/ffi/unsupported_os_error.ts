@@ -1,3 +1,5 @@
+import type { extend } from '../type/index.ts';
+
 /**
  * This error class throws on an unsupported OS.
  */
@@ -10,7 +12,7 @@ export class UnsupportedOSError extends Error {
    */
   constructor(
     os : string,
-    supported : (typeof Deno.build.os)[] = ['windows', 'linux', 'darwin']
+    supported : extend.GenericString<typeof Deno.build.os>[] = ['windows', 'linux', 'darwin']
   ) {
     super(`Unsupported OS: ${os}\nSupported OS: '${supported.join('\', \'')}'`);
     this.os = os;
