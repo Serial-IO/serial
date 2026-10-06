@@ -1,5 +1,6 @@
 import type { conversion } from '../type/index.ts';
 
+
 /**
  * Available parities.
  */

@@ -1,5 +1,6 @@
 import type { Baudrate, DataBits, Parity, StopBits } from './connection/index.ts';
 
+
 /**
  * Options for the serial connection.
  */

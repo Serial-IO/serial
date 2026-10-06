@@ -1,5 +1,6 @@
 import type { extend } from '../type/index.ts';
 
+
 /**
  * This error class throws on an unsupported OS.
  */

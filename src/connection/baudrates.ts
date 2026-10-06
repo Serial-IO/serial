@@ -1,5 +1,6 @@
 import type { conversion, extend } from "../type/index.ts";
 
+
 /**
  * Common default baudrates.
  */
